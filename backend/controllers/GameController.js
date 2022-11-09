@@ -1,5 +1,5 @@
 const express = require("express");
-const knex = require("../../db/knex");
+const knex = require("../db/knex");
 
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
