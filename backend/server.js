@@ -41,8 +41,6 @@ app.get("/getUsers", async (req, res) => {
   try {
     const users = await knex.select().from("users");
     res.status(200).send(users)
-    // console.log(users)
-    // res.status(200).json(users);
   } catch (err) {
     console.log(err)
   }

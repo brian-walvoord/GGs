@@ -10,7 +10,6 @@ function App() {
   const fetchGames = () => {
     fetch("/getGames")
       .then(res => res.json())
-      // .then(res => console.log(res))
       .then(res => setGames(res))
   };
 
