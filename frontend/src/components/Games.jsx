@@ -4,8 +4,10 @@ import "../sass/pages/Games.scss";
 const Games = (props) => {
   const { games, setGames } = props;
 
+  const [searchQuery, setSearchQuery] = useState("ghost of tsushima");
+
   const fetchGames = () => {
-    fetch("/games/getGames")
+    fetch(`/games/getGames/?search=${searchQuery}`)
       .then(res => res.json())
       .then(res => setGames(res))
   };

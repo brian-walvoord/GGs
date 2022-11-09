@@ -7,13 +7,14 @@ const fetch = (...args) =>
 const GameController = {
   getGames: async (req, res) => {
     try {
+      let { search } = req.query;
       fetch("https://api.igdb.com/v4/games", {
         method: "POST",
         headers: {
           "Client-ID": process.env.API_CLIENT_ID,
           "Authorization": process.env.API_AUTH,
         },
-        body: `fields name;where name ~ *"minecraft"*;`
+        body: `fields name, cover;search "${search}";where cover != null;limit 50;`
       })
         .then((data) => data.json())
         .then((data) => res.status(200).json(data));

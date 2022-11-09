@@ -19,7 +19,7 @@ const UserSelect = (props) => {
     <div>
       <h1>Please select a user:</h1>
       {usersFName ? usersFName.map(fname => <h3 key={usersFName.indexOf(fname)}>{fname}</h3>) : <h3>none</h3>}
-      <button className="btn-user"><Link className="btn-txt" to="/home">No...</Link></button>
+      <button className="btn-user"><Link className="btn-txt" to="/home"><img src="https://media.tenor.com/VRJ-c6w57KMAAAAC/isildur-no.gif"></img></Link></button>
     </div>
   );
 }
