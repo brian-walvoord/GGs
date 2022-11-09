@@ -1,4 +1,5 @@
 const express = require("express");
+const knex = require("./db/knex");
 const app = express();
 require("dotenv").config({ path: "./.env.local"});
 const PORT = process.env.PORT || 8080;
@@ -34,6 +35,18 @@ app.get("/getGames", (req, res) => {
     console.log(err);
   }
 });
+
+app.get("/getUsers", async (req, res) => {
+  console.log("🤬")
+  try {
+    const users = await knex.select().from("users");
+    res.status(200).send(users)
+    // console.log(users)
+    // res.status(200).json(users);
+  } catch (err) {
+    console.log(err)
+  }
+})
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend/build", "index.html"));
