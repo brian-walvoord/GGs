@@ -7,11 +7,39 @@
 .game-btn {
   height: auto;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .search-bar {
   height: 3rem;
   margin-top: 1rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  padding: 1rem;
+  background-color: rgb(239, 239, 239);
+  border: 1px solid black;
+  margin: 0 20%;
+  cursor: pointer;
+  &:hover {
+    background-color:rgb(69, 69, 69);
+    color: white;
+  }
+  overflow-wrap: break-word;
+}
+
+.footer {
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:xx-large;
+  font-style:italic;
 }
