@@ -1,5 +1,5 @@
 import '../sass/App.scss';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserSelect from "./UserSelect";
 import Games from "./Games";
@@ -13,13 +13,17 @@ function App() {
   const [games, setGames] = useState(null);
   const [users, setUsers] = useState(null);
   const [usersFName, setUsersFName] = useState([]);
-
+  const [gamePopup, setGamePopup] = useState(false);
+  const [selection, setSelection] = useState(null);
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <UserSelect usersFName={usersFName} setUsersFName={setUsersFName} />
+          <UserSelect 
+            usersFName={usersFName} 
+            setUsersFName={setUsersFName} 
+          />
         </Route>
         <Route path="/home">
           <Navbar />
@@ -27,11 +31,21 @@ function App() {
         </Route>
         <Route path="/games">
           <Navbar />
-          <Games games={games} setGames={setGames}/>
+          <Games 
+            games={games} 
+            setGames={setGames} 
+            gamePopup={gamePopup} 
+            setGamePopup={setGamePopup}
+            selection={selection}
+            setSelection={setSelection}
+          />
         </Route>
         <Route path="/users">
           <Navbar />
-          <Users users={users} setUsers={setUsers}/>
+          <Users 
+            users={users} 
+            setUsers={setUsers}
+          />
         </Route>
       </Switch>
     </Router>
