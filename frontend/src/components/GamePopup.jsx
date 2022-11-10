@@ -1,6 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import Card from 'react-bootstrap/Card';
 import CloseButton from 'react-bootstrap/CloseButton';
+import Spinner from 'react-bootstrap/Spinner';
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
@@ -9,6 +10,8 @@ const GamePopup = (props) => {
   const { setGamePopup, selection } = props;
 
   const [cover, setCover] = useState(null)
+  const [loaded, setLoaded] = useState(false);
+
 
   const closePopup = () => {
     setGamePopup(false)
@@ -28,8 +31,20 @@ const GamePopup = (props) => {
   return (
     <Modal size="lg" show={true} onHide={closePopup}>
       <Card className="popup-container">
-      <CloseButton className="closeBtn" onClick={closePopup}/>
-      <Card.Img className="game-cover" alt="game cover" src={cover}></Card.Img>
+        <CloseButton className="closeBtn" onClick={closePopup}/>
+        <div className="image-container">
+          {loaded ? null : (
+            <div className="load-container">
+              <Spinner animation="border" role="status"></Spinner>
+            </div>
+          )}
+            <Card.Img
+              className="game-cover"
+              style={loaded ? {} : { display: 'none' }}
+              src={cover}
+              onLoad={() => setLoaded(true)}
+            ></Card.Img>
+        </div>
         <Card.Body>
           <div className="title">
             <h1>{selection.name}</h1>

@@ -15,10 +15,27 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1rem;
-  height: auto;
-  width: 30rem;
+  height: 40rem;
+  width: auto;
 }
 
 .title {
   display: flex;
+}
+
+.load-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 30rem;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  height: 40rem;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
