@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserSelect from "./UserSelect";
 import Games from "./Games";
-import Users from "./Users";
+import Library from "./Library";
 import Navbar from "./Navbar";
 import Homepage from "./Homepage";
 import Header from "./Header";
@@ -12,12 +12,12 @@ function App() {
 
   // states
   const [games, setGames] = useState(null);
-  const [users, setUsers] = useState(null);
   const [usersFName, setUsersFName] = useState([]);
   const [gamePopup, setGamePopup] = useState(false);
   const [selection, setSelection] = useState(null);
   const [selectedUser, setSelectedUser] = useState("1");
   const [user, setUser] = useState(null);
+  const [library, setLibrary] = useState(null);
 
   return (
     <Router>
@@ -48,11 +48,12 @@ function App() {
             setUser={setUser}
           />
         </Route>
-        <Route path="/users">
+        <Route path="/library">
           <Navbar />
-          <Users 
-            users={users} 
-            setUsers={setUsers}
+          <Library 
+            user={user}
+            library={library}
+            setLibrary={setLibrary}
           />
         </Route>
       </Switch>

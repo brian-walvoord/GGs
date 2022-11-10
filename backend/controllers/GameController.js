@@ -43,9 +43,7 @@ const GameController = {
     try {
       let { selection, user } = await req.headers;
       let selectionObj = await JSON.parse(selection)
-      let userObj = await JSON.parse(user)
-      console.log(userObj)
-      console.log(selectionObj)
+      let userObj = await JSON.parse(user)[0]
       await knex('user_games').insert({ 
         user_id: userObj.id,
         game_api_id: selectionObj.id,
@@ -54,6 +52,15 @@ const GameController = {
         cover_of_game: selectionObj.cover,
       })
       res.status(200);
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  getLibrary: async (req, res) => {
+    try {
+      const { id } = req.query;
+      let library = await knex.select().from("user_games").where({"user_id": id})
+      res.status(200).json(library)
     } catch (err) {
       console.log(err)
     }
