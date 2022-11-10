@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.integer("user_id").references("id").inTable("users");
     table.integer("game_api_id").notNullable();
     table.string("name_of_game").notNullable();
-    table.string("description_of_game");
+    table.text("description_of_game");
     table.string("cover_of_game");
     table.integer("user_rating");
   });

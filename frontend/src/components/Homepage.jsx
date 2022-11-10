@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "../sass/pages/Homepage.scss";
 
 const Homepage = (props) => {
-  const { selectedUser } = props;
+  const { selectedUser, setUser, user } = props;
 
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
 
   useEffect(() => {
     console.log(`selected user: ${selectedUser}`)

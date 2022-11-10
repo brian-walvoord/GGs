@@ -10,11 +10,13 @@ const Games = (props) => {
     gamePopup, 
     setGamePopup, 
     selection, 
-    setSelection 
+    setSelection,
+    selectedUser,
+    user,
+    setUser
   } = props;
 
   const [searchQuery, setSearchQuery] = useState("");
-  // const [gamePopup, setGamePopup] = useState(false);
 
   const fetchGames = () => {
     fetch(`/games/getGames/?search=${searchQuery}`)
@@ -38,7 +40,7 @@ const Games = (props) => {
           setGamePopup(true);
           setSelection(game);
         }} className="game-container" key={game.id}>{JSON.stringify(game.name)}</h2>) : null}
-      {gamePopup === true && <GamePopup selection={selection} setGamePopup={setGamePopup}/>}
+      {gamePopup === true && <GamePopup user={user} selection={selection} setGamePopup={setGamePopup}/>}
       <div className="footer">~End of Results~</div>
     </>
   )

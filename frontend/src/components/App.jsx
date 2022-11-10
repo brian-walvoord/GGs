@@ -17,6 +17,7 @@ function App() {
   const [gamePopup, setGamePopup] = useState(false);
   const [selection, setSelection] = useState(null);
   const [selectedUser, setSelectedUser] = useState("1");
+  const [user, setUser] = useState(null);
 
   return (
     <Router>
@@ -31,17 +32,20 @@ function App() {
         </Route>
         <Route path="/home">
           <Navbar setSelectedUser={setSelectedUser}/>
-          <Homepage selectedUser={selectedUser} />
+          <Homepage user={user} setUser={setUser} selectedUser={selectedUser} />
         </Route>
         <Route path="/games">
           <Navbar />
           <Games 
+            selectedUser={selectedUser}
             games={games} 
             setGames={setGames} 
             gamePopup={gamePopup} 
             setGamePopup={setGamePopup}
             selection={selection}
             setSelection={setSelection}
+            user={user}
+            setUser={setUser}
           />
         </Route>
         <Route path="/users">

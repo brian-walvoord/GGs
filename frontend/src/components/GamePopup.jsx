@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
 
 const GamePopup = (props) => {
-  const { setGamePopup, selection } = props;
+  const { setGamePopup, selection, user } = props;
 
   const [cover, setCover] = useState(null)
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +27,16 @@ const GamePopup = (props) => {
       })
       .then(res => setCover(res))
   }, [])
+
+  const addToLibrary = () => {
+    fetch(`/games/addGame`, {
+      method: "POST",
+      headers: {
+        'user': JSON.stringify(user),
+        'selection': JSON.stringify(selection)
+      }
+    })
+  };
 
   return (
     <Modal size="lg" show={true} onHide={closePopup}>
@@ -48,7 +58,7 @@ const GamePopup = (props) => {
         <Card.Body>
           <div className="title">
             <h1 className="name">{selection.name}</h1>
-            <button className="add-btn">Add to library</button>
+            <button className="add-btn" onClick={addToLibrary}>Add to library</button>
           </div>
           <h2>{selection.summary}</h2>
         </Card.Body>
