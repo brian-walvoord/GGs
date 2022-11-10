@@ -6,6 +6,7 @@ import Games from "./Games";
 import Users from "./Users";
 import Navbar from "./Navbar";
 import Homepage from "./Homepage";
+import Header from "./Header";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <Router>
+      <Header />
       <Switch>
         <Route exact path="/">
           <UserSelect 

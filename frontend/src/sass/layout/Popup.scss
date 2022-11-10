@@ -21,6 +21,8 @@
 
 .title {
   display: flex;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 .load-container {
@@ -38,4 +40,17 @@
   width: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+.add-btn {
+  width: auto;
+  padding: 0 2rem;
+  margin-left: 2rem;
+  font-size: x-large;
+  background-color:rgb(156, 0, 0);
+  color: white;
+}
+
+.name {
+  font-weight: bold;
 }

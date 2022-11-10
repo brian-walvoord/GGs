@@ -47,8 +47,8 @@ const GamePopup = (props) => {
         </div>
         <Card.Body>
           <div className="title">
-            <h1>{selection.name}</h1>
-            <h3>rating will go here</h3>
+            <h1 className="name">{selection.name}</h1>
+            <button className="add-btn">Add to library</button>
           </div>
           <h2>{selection.summary}</h2>
         </Card.Body>
