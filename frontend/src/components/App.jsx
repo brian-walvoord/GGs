@@ -16,6 +16,7 @@ function App() {
   const [usersFName, setUsersFName] = useState([]);
   const [gamePopup, setGamePopup] = useState(false);
   const [selection, setSelection] = useState(null);
+  const [selectedUser, setSelectedUser] = useState("1");
 
   return (
     <Router>
@@ -23,13 +24,14 @@ function App() {
       <Switch>
         <Route exact path="/">
           <UserSelect 
+            setSelectedUser={setSelectedUser}
             usersFName={usersFName} 
             setUsersFName={setUsersFName} 
           />
         </Route>
         <Route path="/home">
-          <Navbar />
-          <Homepage />
+          <Navbar setSelectedUser={setSelectedUser}/>
+          <Homepage selectedUser={selectedUser} />
         </Route>
         <Route path="/games">
           <Navbar />

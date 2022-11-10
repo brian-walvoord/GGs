@@ -1,3 +1,8 @@
+.user-select-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
 .btn-txt {
   text-decoration: none;
   color: black;
@@ -12,7 +17,11 @@
   margin-top: 1rem;
 }
 
-.isildur {
-  height: 30rem;
-  width: auto;
+.user-select {
+  font-size: xx-large;
+  margin-top: 1rem;
+}
+
+.DELETE {
+  display: none;
 }

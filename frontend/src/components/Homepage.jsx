@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import "../sass/pages/Homepage.scss";
 
-const Homepage = () => {
+const Homepage = (props) => {
+  const { selectedUser } = props;
+
+  useEffect(() => {
+    console.log(`selected user: ${selectedUser}`)
+  })
+
   return (
     <>
       <h1>This is the homepage</h1>
-      <img className="elrond" src="https://media.tenor.com/Rsf53NQGyjUAAAAC/isildur-legendarium.gif"></img>
     </>
   )
 }
