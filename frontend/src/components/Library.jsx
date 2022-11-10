@@ -12,7 +12,9 @@ const Games = (props) => {
 
   return (
     <>
-      {library ? library.map(game => <h1 key={game.id}>{JSON.stringify(game)}</h1>) : <h1>No Games</h1>}
+      <div>
+        {library ? library.map(game => <h2 className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : <h1>No Games</h1>}
+      </div>
     </>
   )
 }

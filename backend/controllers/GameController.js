@@ -41,17 +41,19 @@ const GameController = {
   },
   addGame: async (req, res) => {
     try {
-      let { selection, user } = await req.headers;
-      let selectionObj = await JSON.parse(selection)
-      let userObj = await JSON.parse(user)[0]
-      await knex('user_games').insert({ 
-        user_id: userObj.id,
-        game_api_id: selectionObj.id,
-        name_of_game: selectionObj.name,
-        description_of_game: selectionObj.summary,
-        cover_of_game: selectionObj.cover,
-      })
-      res.status(200);
+      // let { selection, user } = await req.headers;
+      let { user, selection } = await req.headers;
+      console.log(selection)
+      // let selectionObj = await JSON.parse(selection)
+      // let userObj = await JSON.parse(user)[0]
+      // await knex('user_games').insert({ 
+      //   user_id: userObj.id,
+      //   game_api_id: selectionObj.id,
+      //   name_of_game: selectionObj.name,
+      //   description_of_game: selectionObj.summary,
+      //   cover_of_game: selectionObj.cover,
+      // })
+      // res.status(200);
     } catch (err) {
       console.log(err)
     }

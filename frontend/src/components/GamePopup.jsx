@@ -29,12 +29,13 @@ const GamePopup = (props) => {
   }, [])
 
   const addToLibrary = () => {
+    console.log(selection)
     fetch(`/games/addGame`, {
       method: "POST",
       headers: {
         'user': JSON.stringify(user),
-        'selection': JSON.stringify(selection)
-      }
+        'selection': JSON.stringify(selection.summary)
+      },
     })
   };
 
