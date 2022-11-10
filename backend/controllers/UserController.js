@@ -10,6 +10,15 @@ const UserController = {
       console.log(err);
     }
   },
+  getFullName: async (req, res) => {
+    try {
+      let { id } = req.query;
+      const fullName = await knex.select().from("users").where({"id": id})
+      res.status(200).send(fullName)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 };
 
 module.exports = UserController;
