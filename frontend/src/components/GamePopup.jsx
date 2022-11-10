@@ -30,11 +30,13 @@ const GamePopup = (props) => {
 
   const addToLibrary = () => {
     console.log(selection)
+    let selectionStr = JSON.stringify(selection);
+    let fixedStr = selectionStr.split("’").join("'");
     fetch(`/games/addGame`, {
       method: "POST",
       headers: {
         'user': JSON.stringify(user),
-        'selection': JSON.stringify(selection.summary)
+        'selection': fixedStr
       },
     })
   };

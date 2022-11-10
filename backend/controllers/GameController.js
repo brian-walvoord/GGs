@@ -41,9 +41,8 @@ const GameController = {
   },
   addGame: async (req, res) => {
     try {
-      // let { selection, user } = await req.headers;
       let { user, selection } = await req.headers;
-      // console.log(selection)
+      console.log(selection)
       let selectionObj = await JSON.parse(selection)
       let userObj = await JSON.parse(user)[0]
       await knex('user_games').insert({ 
@@ -70,3 +69,14 @@ const GameController = {
 };
 
 module.exports = GameController;
+
+
+
+
+// "Season 4 is starting off with a BANG. Shards of a massive comet have crashed into the map altering the landscape. Discover gravity-defying Hop Rocks and find new ways to play. Jump in and witness the aftermath of the impact while you level up your Battle Pass and earn all new loot.
+
+// The Season 4 Battle Pass is here sporting 100 tiers of awesome new rewards, including new cosmetic items, emotes and Sprays.
+
+// Start a movie marathon in Save the World’s latest questline, Blockbuster! Part 1 starts with Five quests and one Landmark Mission. Ray has gone missing and no one knows where she is. With the help of Spitfire and Lok, investigate the comet and gear up to recruit a team of superheroes. Find Ray and bring her back home!"
+
+// "Season 8 has arrived and a monstrous volcano has appeared! Freed from the Ice King’s castle, the now-powerful Prisoner has brought fire and flame to Fortnite and its islands. Pirates, Ninjas and a ship load of new fighters will tussle over treasure, battle with Pirate Cannons and uncover legendary loot. For those daring enough to explore, the new Lazy Lagoon and Sunny Steps locations are just a jump away with the help of Volcanic Vents. There are tons of new areas to explore and secrets to uncover. This season, X marks the spot!"
