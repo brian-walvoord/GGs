@@ -1,17 +1,19 @@
 import Modal from "react-bootstrap/Modal";
 import Card from 'react-bootstrap/Card';
 import CloseButton from 'react-bootstrap/CloseButton';
+import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
 
 const LibraryPopup = (props) => {
-  const { setLibraryPopup, selection, user, setRating, rating } = props;
+  const { setLibraryPopup, selection, user, setRating, rating, gameDeleted, setGameDeleted } = props;
 
-  const [cover, setCover] = useState(null)
+  const [cover, setCover] = useState(null);
   const [loaded, setLoaded] = useState(false);
-  const [databaseRating, setDatabaseRating] = useState(null)
+  const [databaseRating, setDatabaseRating] = useState(null);
+  // const [gameDeleted, setGameDeleted] = useState(false);
 
 
   const closePopup = () => {
@@ -44,6 +46,15 @@ const LibraryPopup = (props) => {
       })
       .then(res => setCover(res))
   }, [])
+
+  const removeGame = async () => {
+    let result = await fetch(`/games/removeGame/?id=${selection.id}`, {
+      method: "DELETE"
+    })
+    if (result.status === 200) {
+      setGameDeleted(true);
+    }
+  }
 
   return (
     <Modal size="lg" show={true} onHide={closePopup}>
@@ -84,6 +95,7 @@ const LibraryPopup = (props) => {
             </div>
           </div>
           <h2>{selection.description_of_game}</h2>
+          {gameDeleted ? <h2>Game Deleted!</h2> : <Button onClick={removeGame} className="remove-btn" variant="danger">Remove from Library</Button>}
         </Card.Body>
       </Card>
     </Modal>

@@ -5,11 +5,14 @@ import LibraryPopup from "./LibraryPopup";
 const Library = (props) => {
   const { library, setLibrary, user, selection, setLibraryPopup, libraryPopup, setSelection, rating, setRating } = props;
 
+  const [gameDeleted, setGameDeleted] = useState(false);
+
+
   useEffect(() => {
     fetch(`/games/getLibrary?id=${user[0].id}`)
       .then(res => res.json())
       .then(res => setLibrary(res))
-  }, [])
+  }, [gameDeleted])
 
   return (
     <>
@@ -17,8 +20,9 @@ const Library = (props) => {
         {library ? library.map(game => <h2 onClick={() => {
           setLibraryPopup(true)
           setSelection(game)
+          setGameDeleted(false)
         }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : <h1>No Games</h1>}
-        {libraryPopup === true && <LibraryPopup rating={rating} setRating={setRating} user={user} selection={selection} setLibraryPopup={setLibraryPopup}/>}
+        {libraryPopup === true && <LibraryPopup gameDeleted={gameDeleted} setGameDeleted={setGameDeleted} rating={rating} setRating={setRating} user={user} selection={selection} setLibraryPopup={setLibraryPopup}/>}
       </div>
     </>
   )

@@ -11,6 +11,7 @@ const GamePopup = (props) => {
 
   const [cover, setCover] = useState(null)
   const [loaded, setLoaded] = useState(false);
+  const [gameAdded, setGameAdded] = useState(false);
 
 
   const closePopup = () => {
@@ -28,18 +29,20 @@ const GamePopup = (props) => {
       .then(res => setCover(res))
   }, [])
 
-  const addToLibrary = () => {
-    console.log(selection)
+  const addToLibrary = async () => {
     let selectionStr = JSON.stringify(selection);
     let fixedStr = selectionStr.split("’").join("'");
     let secondFixedStr = fixedStr.split("–").join("-");
-    fetch(`/games/addGame`, {
+    let result = await fetch(`/games/addGame`, {
       method: "POST",
       headers: {
         'user': JSON.stringify(user),
         'selection': secondFixedStr
       },
     })
+    if (result.status === 200) {
+      setGameAdded(true)
+    };
   };
 
   return (
@@ -62,7 +65,7 @@ const GamePopup = (props) => {
         <Card.Body>
           <div className="title">
             <h1 className="name">{selection.name}</h1>
-            <button className="add-btn" onClick={addToLibrary}>Add to library</button>
+            {gameAdded ? <h2>Game added!</h2> : <button className="add-btn" onClick={addToLibrary}>Add to library</button>}
           </div>
           <h2>{selection.summary}</h2>
         </Card.Body>

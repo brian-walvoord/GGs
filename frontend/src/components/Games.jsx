@@ -5,11 +5,11 @@ import GamePopup from "./GamePopup.jsx";
 
 const Games = (props) => {
   const { 
-    games, 
-    setGames, 
-    gamePopup, 
-    setGamePopup, 
-    selection, 
+    games,
+    setGames,
+    gamePopup,
+    setGamePopup,
+    selection,
     setSelection,
     selectedUser,
     user,

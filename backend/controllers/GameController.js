@@ -20,6 +20,7 @@ const GameController = {
         .then((data) => res.status(200).json(data));
     } catch (err) {
       console.log(err);
+      res.status(500).send();
     }
   },
   getCover: async (req, res) => {
@@ -37,6 +38,7 @@ const GameController = {
         .then(data => res.status(200).json(data))
     } catch (err) {
       console.log(err)
+      res.status(500).send();
     }
   },
   addGame: async (req, res) => {
@@ -51,9 +53,10 @@ const GameController = {
         description_of_game: selectionObj.summary,
         cover_of_game: selectionObj.cover,
       })
-      res.status(200);
+      res.status(200).send("successfully added");
     } catch (err) {
       console.log(err)
+      res.status(500).send();
     }
   },
   getLibrary: async (req, res) => {
@@ -63,6 +66,7 @@ const GameController = {
       res.status(200).json(library)
     } catch (err) {
       console.log(err)
+      res.status(500).send();
     }
   },
   addRating: async (req, res) => {
@@ -70,9 +74,10 @@ const GameController = {
       const { rating } = req.query;
       const { id } = req.headers;
       await knex("user_games").update({"user_rating": rating}).where({"id": id})
-      res.status(200)
+      res.status(200).send();
     } catch (err) {
       console.log(err);
+      res.status(500).send();
     }
   },
   getRating: async (req, res) => {
@@ -82,6 +87,17 @@ const GameController = {
       res.status(200).json(rating)
     } catch (err) {
       console.log(err)
+      res.status(500).send();
+    }
+  },
+  removeGame: async (req, res) => {
+    try {
+      const { id } = req.query;
+      await knex('user_games').where({"id": id}).del();
+      res.status(200).send();
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
     }
   }
 };

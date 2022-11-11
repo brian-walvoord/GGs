@@ -8,5 +8,6 @@ router.get("/getLibrary", user_ctrl.getLibrary);
 router.get("/getRating", user_ctrl.getRating);
 router.post("/addGame", user_ctrl.addGame);
 router.put("/addRating", user_ctrl.addRating);
+router.delete("/removeGame", user_ctrl.removeGame);
 
 module.exports = router;
