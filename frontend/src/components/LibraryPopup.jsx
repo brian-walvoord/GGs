@@ -11,16 +11,16 @@ const LibraryPopup = (props) => {
 
   const [cover, setCover] = useState(null)
   const [loaded, setLoaded] = useState(false);
+  const [databaseRating, setDatabaseRating] = useState(null)
 
 
   const closePopup = () => {
     setLibraryPopup(false)
   }
 
-  const submitRating = (userRating) => {
-    // console.log(userRating)
+  const submitRating = async (userRating) => {
     setRating(userRating)
-    fetch(`/games/addRating?rating=${userRating}`, {
+    await fetch(`/games/addRating?rating=${userRating}`, {
       method: "PUT",
       headers: {
         id: JSON.stringify(selection.id)
@@ -29,7 +29,12 @@ const LibraryPopup = (props) => {
   }
 
   useEffect(() => {
-    console.log(selection)
+    fetch(`/games/getRating/?id=${selection.id}`)
+      .then(res => res.json())
+      .then(res => setDatabaseRating(res[0].user_rating))
+  }, [])
+
+  useEffect(() => {
     fetch(`/games/getCover/?id=${selection.cover_of_game}`)
       .then(res => res.json())
       .then(res => {
@@ -61,7 +66,8 @@ const LibraryPopup = (props) => {
           <div className="title">
             <h1 className="name">{selection.name_of_game}</h1>
             <div className="rating-container">
-              <label className="rating-title">Rating:</label>
+              {databaseRating ? <h2>Your Rating: <span className="rating-score">{databaseRating}/10</span></h2> : <h2>Your Rating: <i>not yet rated</i></h2>}
+              <label className="rating-title">Change Rating:</label>
               <select onChange={e => submitRating(e.target.value)} className="rating-dropdown">
                 <option value="null"></option>
                 <option value="1">1</option>

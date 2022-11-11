@@ -74,6 +74,15 @@ const GameController = {
     } catch (err) {
       console.log(err);
     }
+  },
+  getRating: async (req, res) => {
+    try {
+      const { id } = req.query;
+      const rating = await knex.select("user_rating").from("user_games").where({"id": id})
+      res.status(200).json(rating)
+    } catch (err) {
+      console.log(err)
+    }
   }
 };
 
