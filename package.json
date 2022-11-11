@@ -8,9 +8,9 @@
     "start": "nodemon backend/server.js",
     "serve": "node backend/server.js",
     "build": "npm install && npm run migrate:latest && npm run seed && cd frontend && npm install && npm run build",
-    "migrate:latest": "cd backend/db && knex migrate:latest",
-    "migrate:down": "cd backend/db && knex migrate:down",
-    "seed": "cd backend/db && knex seed:run"
+    "migrate:latest": "cd backend/db && npx knex migrate:latest",
+    "migrate:down": "cd backend/db && npx knex migrate:down",
+    "seed": "cd backend/db && npx knex seed:run"
   },
   "author": "",
   "license": "ISC",
