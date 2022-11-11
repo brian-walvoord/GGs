@@ -6,7 +6,7 @@ const UserController = {
     try {
       let { id } = req.query;
       const fullName = await knex.select().from("users").where({"id": id})
-      res.status(200).send(fullName)
+      res.status(200).json(fullName)
     } catch (err) {
       console.log(err)
       res.status(500).send();
