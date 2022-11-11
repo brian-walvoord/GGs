@@ -16,7 +16,7 @@ function App() {
   const [libraryPopup, setLibraryPopup] = useState(false);
   const [selection, setSelection] = useState(null);
   const [selectedUser, setSelectedUser] = useState("1");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const [library, setLibrary] = useState(null);
 
   return (
