@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
 
 const LibraryPopup = (props) => {
-  const { setLibraryPopup, selection, user } = props;
+  const { setLibraryPopup, selection, user, setRating, rating } = props;
 
   const [cover, setCover] = useState(null)
   const [loaded, setLoaded] = useState(false);
@@ -15,6 +15,17 @@ const LibraryPopup = (props) => {
 
   const closePopup = () => {
     setLibraryPopup(false)
+  }
+
+  const submitRating = (userRating) => {
+    // console.log(userRating)
+    setRating(userRating)
+    fetch(`/games/addRating?rating=${userRating}`, {
+      method: "PUT",
+      headers: {
+        id: JSON.stringify(selection.id)
+      }
+    })
   }
 
   useEffect(() => {
@@ -28,19 +39,6 @@ const LibraryPopup = (props) => {
       })
       .then(res => setCover(res))
   }, [])
-
-  // const addToLibrary = () => {
-  //   console.log(selection)
-  //   let selectionStr = JSON.stringify(selection);
-  //   let fixedStr = selectionStr.split("’").join("'");
-  //   fetch(`/games/addGame`, {
-  //     method: "POST",
-  //     headers: {
-  //       'user': JSON.stringify(user),
-  //       'selection': fixedStr
-  //     },
-  //   })
-  // };
 
   return (
     <Modal size="lg" show={true} onHide={closePopup}>
@@ -62,6 +60,22 @@ const LibraryPopup = (props) => {
         <Card.Body>
           <div className="title">
             <h1 className="name">{selection.name_of_game}</h1>
+            <div className="rating-container">
+              <label className="rating-title">Rating:</label>
+              <select onChange={e => submitRating(e.target.value)} className="rating-dropdown">
+                <option value="null"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
           </div>
           <h2>{selection.description_of_game}</h2>
         </Card.Body>

@@ -11,3 +11,15 @@
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.header-user {
+  color: white;
+  font-size: xx-large;
+}
+
+.header-user-container {
+  position: absolute;
+  right: 20px;
+  top: 8.2rem;
+  z-index: 1
+}

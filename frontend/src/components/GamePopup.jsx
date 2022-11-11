@@ -32,11 +32,12 @@ const GamePopup = (props) => {
     console.log(selection)
     let selectionStr = JSON.stringify(selection);
     let fixedStr = selectionStr.split("’").join("'");
+    let secondFixedStr = fixedStr.split("–").join("-");
     fetch(`/games/addGame`, {
       method: "POST",
       headers: {
         'user': JSON.stringify(user),
-        'selection': fixedStr
+        'selection': secondFixedStr
       },
     })
   };

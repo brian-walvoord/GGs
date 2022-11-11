@@ -3,7 +3,7 @@ import "../sass/pages/Library.scss";
 import LibraryPopup from "./LibraryPopup";
 
 const Library = (props) => {
-  const { library, setLibrary, user, selection, setLibraryPopup, libraryPopup, setSelection } = props;
+  const { library, setLibrary, user, selection, setLibraryPopup, libraryPopup, setSelection, rating, setRating } = props;
 
   useEffect(() => {
     fetch(`/games/getLibrary?id=${user[0].id}`)
@@ -18,7 +18,7 @@ const Library = (props) => {
           setLibraryPopup(true)
           setSelection(game)
         }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : <h1>No Games</h1>}
-        {libraryPopup === true && <LibraryPopup user={user} selection={selection} setLibraryPopup={setLibraryPopup}/>}
+        {libraryPopup === true && <LibraryPopup rating={rating} setRating={setRating} user={user} selection={selection} setLibraryPopup={setLibraryPopup}/>}
       </div>
     </>
   )

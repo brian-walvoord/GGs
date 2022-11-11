@@ -9,16 +9,6 @@ const UserSelect = (props) => {
     setSelectedUser("1")
   }, [])
 
-  // useEffect(() => {
-  //   fetch("/users/getUsers")
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setUsersFName(res.map(user => {
-  //         return user.first_name
-  //       }))
-  //     })
-  // }, []);
-
   return (
     <div className="user-select-container">
       <h1>Please select a user:</h1>

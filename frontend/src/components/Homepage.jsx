@@ -4,12 +4,6 @@ import "../sass/pages/Homepage.scss";
 const Homepage = (props) => {
   const { selectedUser, setUser, user } = props;
 
-  // const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    console.log(`selected user: ${selectedUser}`)
-  }, [])
-
   // use this to fetch full name from database with the selectedUser number === id
   useEffect(() => {
     fetch(`/users/getFullName?id=${selectedUser}`)

@@ -19,10 +19,11 @@ function App() {
   const [selectedUser, setSelectedUser] = useState("1");
   const [user, setUser] = useState(null);
   const [library, setLibrary] = useState(null);
+  const [rating, setRating] = useState(null);
 
   return (
     <Router>
-      <Header />
+      <Header user={user} />
       <Switch>
         <Route exact path="/">
           <UserSelect 
@@ -52,6 +53,8 @@ function App() {
         <Route path="/library">
           <Navbar />
           <Library 
+            setRating={setRating}
+            rating={rating}
             selection={selection}
             setSelection={setSelection}
             setLibraryPopup={setLibraryPopup}
