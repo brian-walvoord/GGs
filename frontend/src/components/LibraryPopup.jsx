@@ -8,12 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
 
 const LibraryPopup = (props) => {
-  const { setLibraryPopup, selection, user, setRating, rating, gameDeleted, setGameDeleted } = props;
+  const { setLibraryPopup, selection, user, setRating, rating, gameDeleted, setGameDeleted, setRatingChanged, ratingChanged } = props;
 
   const [cover, setCover] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [databaseRating, setDatabaseRating] = useState(null);
-  // const [gameDeleted, setGameDeleted] = useState(false);
 
 
   const closePopup = () => {
@@ -22,19 +21,22 @@ const LibraryPopup = (props) => {
 
   const submitRating = async (userRating) => {
     setRating(userRating)
-    await fetch(`/games/addRating?rating=${userRating}`, {
+    let result = await fetch(`/games/addRating?rating=${userRating}`, {
       method: "PUT",
       headers: {
         id: JSON.stringify(selection.id)
       }
     })
+    if (result.status === 200) {
+      setRatingChanged(true);
+    }
   }
 
   useEffect(() => {
     fetch(`/games/getRating/?id=${selection.id}`)
       .then(res => res.json())
       .then(res => setDatabaseRating(res[0].user_rating))
-  }, [])
+  }, [ratingChanged])
 
   useEffect(() => {
     fetch(`/games/getCover/?id=${selection.cover_of_game}`)
@@ -79,7 +81,10 @@ const LibraryPopup = (props) => {
             <div className="rating-container">
               {databaseRating ? <h2>Your Rating: <span className="rating-score">{databaseRating}/10</span></h2> : <h2>Your Rating: <i>not yet rated</i></h2>}
               <label className="rating-title">Change Rating:</label>
-              <select onChange={e => submitRating(e.target.value)} className="rating-dropdown">
+              <select onChange={e => {
+                  submitRating(e.target.value)
+                  setRatingChanged(false)
+                }} className="rating-dropdown">
                 <option value="null"></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
