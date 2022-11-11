@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import "../sass/pages/Users.scss";
+import "../sass/pages/Library.scss";
+import LibraryPopup from "./LibraryPopup";
 
-const Games = (props) => {
-  const { library, setLibrary, user } = props;
+const Library = (props) => {
+  const { library, setLibrary, user, selection, setLibraryPopup, libraryPopup, setSelection } = props;
 
   useEffect(() => {
     fetch(`/games/getLibrary?id=${user[0].id}`)
@@ -13,10 +14,14 @@ const Games = (props) => {
   return (
     <>
       <div>
-        {library ? library.map(game => <h2 className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : <h1>No Games</h1>}
+        {library ? library.map(game => <h2 onClick={() => {
+          setLibraryPopup(true)
+          setSelection(game)
+        }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : <h1>No Games</h1>}
+        {libraryPopup === true && <LibraryPopup user={user} selection={selection} setLibraryPopup={setLibraryPopup}/>}
       </div>
     </>
   )
 }
 
-export default Games;
+export default Library;

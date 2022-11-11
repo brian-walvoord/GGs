@@ -14,6 +14,7 @@ function App() {
   const [games, setGames] = useState(null);
   const [usersFName, setUsersFName] = useState([]);
   const [gamePopup, setGamePopup] = useState(false);
+  const [libraryPopup, setLibraryPopup] = useState(false);
   const [selection, setSelection] = useState(null);
   const [selectedUser, setSelectedUser] = useState("1");
   const [user, setUser] = useState(null);
@@ -51,6 +52,10 @@ function App() {
         <Route path="/library">
           <Navbar />
           <Library 
+            selection={selection}
+            setSelection={setSelection}
+            setLibraryPopup={setLibraryPopup}
+            libraryPopup = {libraryPopup}
             user={user}
             library={library}
             setLibrary={setLibrary}
