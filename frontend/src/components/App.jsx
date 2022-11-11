@@ -27,7 +27,7 @@ function App() {
           <UserSelect setSelectedUser={setSelectedUser}/>
         </Route>
         <Route path="/home">
-          <Navbar setSelectedUser={setSelectedUser}/>
+          <Navbar setUser={setUser}/>
           <Homepage 
             user={user} 
             setUser={setUser} 
@@ -35,7 +35,7 @@ function App() {
           />
         </Route>
         <Route path="/games">
-          <Navbar />
+          <Navbar setUser={setUser} />
           <Games 
             games={games} 
             setGames={setGames} 
@@ -47,7 +47,7 @@ function App() {
           />
         </Route>
         <Route path="/library">
-          <Navbar />
+          <Navbar setUser={setUser} />
           <Library 
             selection={selection}
             setSelection={setSelection}
