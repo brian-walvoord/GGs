@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import "../sass/layout/Navbar.scss";
 
-const Navbar = (props) => {
-  const { setSelectedUser } = props;
-
+const Navbar = () => {
   return (
     <nav className="navbar">
       <Link className="link" to="/home">Home</Link>

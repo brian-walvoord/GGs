@@ -7,7 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
 
 const GamePopup = (props) => {
-  const { setGamePopup, selection, user } = props;
+  const { 
+    setGamePopup, 
+    selection, 
+    user, 
+    gameAlreadyAdded, 
+    setGameAlreadyAdded 
+  } = props;
 
   const [cover, setCover] = useState(null)
   const [loaded, setLoaded] = useState(false);
@@ -16,6 +22,7 @@ const GamePopup = (props) => {
 
   const closePopup = () => {
     setGamePopup(false)
+    setGameAlreadyAdded(null);
   }
 
   useEffect(() => {
@@ -65,7 +72,7 @@ const GamePopup = (props) => {
         <Card.Body>
           <div className="title">
             <h1 className="name">{selection.name}</h1>
-            {gameAdded ? <h2>Game added!</h2> : <button className="add-btn" onClick={addToLibrary}>Add to library</button>}
+            {(gameAdded || gameAlreadyAdded) ? <h2>Game added!</h2> : <button className="add-btn" onClick={addToLibrary}>Add to library</button>}
           </div>
           <h2>{selection.summary}</h2>
         </Card.Body>

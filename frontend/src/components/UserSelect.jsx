@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import "../sass/pages/UserSelect.scss";
 
 const UserSelect = (props) => {
-  const { usersFName, setUsersFName, setSelectedUser } = props
+  const { setSelectedUser } = props
 
   useEffect(() => {
     setSelectedUser("1")
@@ -12,7 +12,6 @@ const UserSelect = (props) => {
   return (
     <div className="user-select-container">
       <h1>Please select a user:</h1>
-      {usersFName ? usersFName.map(fname => <h3 className="DELETE" key={usersFName.indexOf(fname)}>{fname}</h3>) : <h3>none</h3>}
       <select name="users" className="user-select" onChange={e => setSelectedUser(e.target.value)}>
         <option value="1">🪁 Franklin</option>
         <option value="2">🎩 Abraham</option>

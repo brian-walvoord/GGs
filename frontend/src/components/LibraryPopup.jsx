@@ -8,7 +8,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
 
 const LibraryPopup = (props) => {
-  const { setLibraryPopup, selection, user, setRating, rating, gameDeleted, setGameDeleted, setRatingChanged, ratingChanged } = props;
+  const { 
+    setLibraryPopup, 
+    selection, 
+    gameDeleted, 
+    setGameDeleted, 
+    setRatingChanged,
+    ratingChanged 
+  } = props;
 
   const [cover, setCover] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -20,7 +27,6 @@ const LibraryPopup = (props) => {
   }
 
   const submitRating = async (userRating) => {
-    setRating(userRating)
     let result = await fetch(`/games/addRating?rating=${userRating}`, {
       method: "PUT",
       headers: {

@@ -23,6 +23,22 @@ const GameController = {
       res.status(500).send();
     }
   },
+  checkIfAdded: async (req, res) => {
+    try {
+      let { selection, user } = req.headers;
+      let selectionObj = JSON.parse(selection);
+      let userObj = JSON.parse(user);
+      let result = await knex.select().from("user_games").where({"game_api_id": selectionObj, "user_id": userObj[0].id})
+      if (result.length) {
+        res.status(200).send(true)
+      } else {
+        res.status(200).send(false)
+      }
+    } catch (err) {
+      console.log(err)
+      res.status(500).send()
+    }
+  },
   getCover: async (req, res) => {
     try {
       let { id } = req.query;

@@ -3,7 +3,15 @@ import "../sass/pages/Library.scss";
 import LibraryPopup from "./LibraryPopup";
 
 const Library = (props) => {
-  const { library, setLibrary, user, selection, setLibraryPopup, libraryPopup, setSelection, rating, setRating } = props;
+  const { 
+    library, 
+    setLibrary, 
+    user, 
+    selection, 
+    setLibraryPopup, 
+    libraryPopup, 
+    setSelection 
+  } = props;
 
   const [gameDeleted, setGameDeleted] = useState(false);
   const [ratingChanged, setRatingChanged] = useState(false);
@@ -23,7 +31,14 @@ const Library = (props) => {
           setSelection(game)
           setGameDeleted(false)
         }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : <h1>No Games</h1>}
-        {libraryPopup === true && <LibraryPopup setRatingChanged={setRatingChanged} ratingChanged={ratingChanged} gameDeleted={gameDeleted} setGameDeleted={setGameDeleted} rating={rating} setRating={setRating} user={user} selection={selection} setLibraryPopup={setLibraryPopup}/>}
+        {libraryPopup === true && <LibraryPopup 
+                                    setRatingChanged={setRatingChanged} 
+                                    ratingChanged={ratingChanged} 
+                                    gameDeleted={gameDeleted} 
+                                    setGameDeleted={setGameDeleted} 
+                                    selection={selection} 
+                                    setLibraryPopup={setLibraryPopup}
+                                  />}
       </div>
     </>
   )

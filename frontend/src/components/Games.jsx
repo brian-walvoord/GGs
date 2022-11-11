@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../sass/pages/Games.scss";
 import GamePopup from "./GamePopup.jsx";
 
@@ -11,12 +11,11 @@ const Games = (props) => {
     setGamePopup,
     selection,
     setSelection,
-    selectedUser,
     user,
-    setUser
   } = props;
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [gameAlreadyAdded, setGameAlreadyAdded] = useState(null)
 
   const fetchGames = () => {
     fetch(`/games/getGames/?search=${searchQuery}`)
@@ -33,14 +32,32 @@ const Games = (props) => {
   return (
     <>
       <div className="search-bar">
-        <input className="game-input-field" placeholder="Search for games" onKeyPress={keyHandler} onChange={e => setSearchQuery(e.target.value)}></input>
+        <input 
+          className="game-input-field" 
+          placeholder="Search for games" 
+          onKeyPress={keyHandler} 
+          onChange={e => setSearchQuery(e.target.value)}
+        ></input>
         <button className="game-btn" onClick={fetchGames}>Search</button>
       </div>
-      {games ? games.map(game => <h2 onClick={() => {
-          setGamePopup(true);
+      {games ? games.map(game => <h2 onClick={async () => {
           setSelection(game);
+          await fetch(`/games/checkIfAdded`, {
+            method: "GET",
+            headers: {
+              selection: JSON.stringify(game.id),
+              user: JSON.stringify(user)
+            }
+          }).then(res => res.json())
+            .then(res => setGameAlreadyAdded(res))
+          setGamePopup(true);
         }} className="game-container" key={game.id}>{JSON.stringify(game.name)}</h2>) : null}
-      {gamePopup === true && <GamePopup user={user} selection={selection} setGamePopup={setGamePopup}/>}
+      {gamePopup === true && <GamePopup 
+                                gameAlreadyAdded={gameAlreadyAdded} 
+                                setGameAlreadyAdded={setGameAlreadyAdded} 
+                                user={user} selection={selection} 
+                                setGamePopup={setGamePopup}
+                              />}
       <div className="footer">~End of Results~</div>
     </>
   )
