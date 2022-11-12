@@ -1,0 +1,14 @@
+@use "../utilities/variables" as v;
+
+.app-container {
+  background-color: v.$primary-color;
+}
+
+.background {
+  background-color: v.$primary-color;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}

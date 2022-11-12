@@ -1,6 +1,8 @@
+@use "../utilities/variables" as v;
+
 .navbar {
-  background-color: black;
-  color: white;
+  background-color: v.$black;
+  color: v.$white;
   height: 6rem;
   display: flex;
   justify-content: center;
@@ -11,7 +13,8 @@
 .link {
   margin-left: 1rem;
   margin-right: 1rem;
-  color: white;
+  background-color: v.$black;
+  color: v.$white;
   font-size: xx-large;
   text-underline-position: under;
 }

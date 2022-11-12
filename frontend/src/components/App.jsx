@@ -1,4 +1,4 @@
-import '../sass/App.scss';
+import '../sass/layout/App.scss';
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserSelect from "./UserSelect";
@@ -20,46 +20,49 @@ function App() {
   const [library, setLibrary] = useState(null);
 
   return (
-    <Router>
-      <Header user={user} />
-      <Switch>
-        <Route exact path="/">
-          <UserSelect setSelectedUser={setSelectedUser}/>
-        </Route>
-        <Route path="/home">
-          <Navbar setUser={setUser}/>
-          <Homepage 
-            user={user} 
-            setUser={setUser} 
-            selectedUser={selectedUser} 
-          />
-        </Route>
-        <Route path="/games">
-          <Navbar setUser={setUser} />
-          <Games 
-            games={games} 
-            setGames={setGames} 
-            gamePopup={gamePopup} 
-            setGamePopup={setGamePopup}
-            selection={selection}
-            setSelection={setSelection}
-            user={user}
-          />
-        </Route>
-        <Route path="/library">
-          <Navbar setUser={setUser} />
-          <Library 
-            selection={selection}
-            setSelection={setSelection}
-            setLibraryPopup={setLibraryPopup}
-            libraryPopup = {libraryPopup}
-            user={user}
-            library={library}
-            setLibrary={setLibrary}
-          />
-        </Route>
-      </Switch>
-    </Router>
+    <div className="app-container">
+      <Router>
+        <Header user={user} />
+        <Switch>
+          <Route exact path="/">
+            <UserSelect setSelectedUser={setSelectedUser}/>
+          </Route>
+          <Route path="/home">
+            <Navbar setUser={setUser}/>
+            <Homepage 
+              user={user} 
+              setUser={setUser} 
+              selectedUser={selectedUser} 
+            />
+          </Route>
+          <Route path="/games">
+            <Navbar setUser={setUser} />
+            <Games 
+              games={games} 
+              setGames={setGames} 
+              gamePopup={gamePopup} 
+              setGamePopup={setGamePopup}
+              selection={selection}
+              setSelection={setSelection}
+              user={user}
+            />
+          </Route>
+          <Route path="/library">
+            <Navbar setUser={setUser} />
+            <Library 
+              selection={selection}
+              setSelection={setSelection}
+              setLibraryPopup={setLibraryPopup}
+              libraryPopup = {libraryPopup}
+              user={user}
+              library={library}
+              setLibrary={setLibrary}
+            />
+          </Route>
+        </Switch>
+      </Router>
+      <div className="background"></div>
+    </div>
   );
 }
 

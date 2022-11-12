@@ -1,23 +1,40 @@
+@use "../utilities/variables" as v;
+
+
 .user-select-container {
   text-align: center;
-  margin-top: 3rem;
+  margin-top: 10rem;
 }
 
 .btn-txt {
   text-decoration: none;
-  color: black;
-  font-size: x-large;
+  color: v.$black;
+  font-size: xx-large;
 }
 
 .btn-user {
-  height: auto;
+  height: 50px;
   width: auto;
   cursor: pointer;
   margin-left: 1rem;
-  margin-top: 1rem;
 }
 
 .user-select {
-  font-size: xx-large;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  font-size: 38px;
+}
+
+.pill-container {
+  margin: 4rem auto 4rem;
+  padding: 1rem 3rem 2rem 3rem;
+  width: fit-content;
+  background-color: v.$secondary-color;
+  border-radius: 30px;
+  box-shadow: 10px 10px v.$black;
+}
+
+.select-title {
+  color: v.$white;
+  text-align: center;
+  font-size: 80px;
 }

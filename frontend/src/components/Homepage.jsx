@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "../sass/pages/Homepage.scss";
 
 const Homepage = (props) => {
   const { 

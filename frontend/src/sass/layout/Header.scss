@@ -1,24 +1,29 @@
+@use "../utilities/variables" as v;
+
 .header-container {
-  background-color: black;
+  background-color: v.$black;
   display: flex;
   justify-content: center;
   height: auto;
 }
 
 .header-title {
-  color: white;
+  background-color: v.$black;
+  color: v.$white;
   font-size: 120px;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .header-user {
-  color: white;
+  color: v.$white;
+  background-color: v.$black;
   font-size: xx-large;
 }
 
 .header-user-container {
   position: absolute;
+  background-color: v.$black;
   right: 20px;
   top: 8.2rem;
   z-index: 1
