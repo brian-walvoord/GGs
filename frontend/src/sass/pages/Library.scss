@@ -1,5 +1,10 @@
 @use "../utilities/variables" as v;
 
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
 .library-container {
   margin-top: 1rem;
 }
@@ -13,14 +18,23 @@
   box-shadow: 10px 10px v.$black;
 }
 
-.library-title {
+.library-title-container {
   color: v.$white;
   text-align: center;
   margin: 4rem auto 4rem;
   padding: 1rem 3rem 2rem 3rem;
   width: fit-content;
   background-color: v.$secondary-color;
-  font-size: 130px;
   border-radius: 30px;
   box-shadow: 10px 10px v.$black;
+}
+
+.library-title {
+  display: inline-block;
+  animation: typing .7s steps(10, end) forwards;
+  overflow: hidden;
+  border-right: .15em solid v.$accent-color;
+  white-space: nowrap;
+  width: 0;
+  font-size: 130px;
 }

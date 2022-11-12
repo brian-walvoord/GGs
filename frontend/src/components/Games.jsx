@@ -31,6 +31,9 @@ const Games = (props) => {
 
   return (
     <>
+      <div className="games-title-container">
+        <h1 className="games-title">Search Games</h1>
+      </div>
       <div className="search-bar">
         <input 
           className="game-input-field" 

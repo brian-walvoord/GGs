@@ -1,0 +1,63 @@
+@use "../utilities/variables" as v;
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.welcome-container {
+  margin: 4rem auto 4rem;
+  padding: 1rem 3rem 2rem 3rem;
+  text-align: center;
+  width: fit-content;
+  background-color: v.$secondary-color;
+  border-radius: 30px;
+  box-shadow: 10px 10px v.$black;
+}
+
+.welcome-txt {
+  display: inline-block;
+  text-align: center;
+  color: v.$white;
+  font-size: 120px;
+  margin-top: 2rem;
+  animation: typing 1.5s steps(20, end) forwards;
+  overflow: hidden;
+  border-right: .15em solid v.$accent-color;
+  white-space: nowrap;
+  width: 0;
+}
+
+.welcome-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.welcome-btn {
+  background-color: v.$neutral-color;
+  margin: 0 2rem 4rem;
+  width: 40rem;
+  flex-wrap:wrap;
+  text-align: center;
+  padding: 4rem 0;
+  border-radius: 20px;
+  box-shadow: 10px 10px v.$black;
+  cursor: pointer;
+  &:active {
+    box-shadow: none;
+    transform: translateY(10px) translateX(10px);
+  }
+  &:hover {
+    background-color: v.$primary-color;
+    .welcome-btn-txt {
+      color: v.$neutral-color;
+    }
+  }
+}
+
+.welcome-btn-txt {
+  color: v.$black;
+  font-size: 70px;
+}

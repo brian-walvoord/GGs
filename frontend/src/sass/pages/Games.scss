@@ -1,5 +1,9 @@
 @use "../utilities/variables" as v;
 
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
 
 .game-input-field {
   width: 50%;
@@ -46,4 +50,25 @@
   font-size:xx-large;
   font-style:italic;
   color: v.$white;
+}
+
+.games-title-container {
+  color: v.$white;
+  text-align: center;
+  margin: 4rem auto 4rem;
+  padding: 1rem 3rem 2rem 3rem;
+  width: fit-content;
+  background-color: v.$secondary-color;
+  border-radius: 30px;
+  box-shadow: 10px 10px v.$black;
+}
+
+.games-title {
+  display: inline-block;
+  animation: typing .85s steps(12, end) forwards;
+  overflow: hidden;
+  border-right: .15em solid v.$accent-color;
+  white-space: nowrap;
+  width: 0;
+  font-size: 130px;
 }

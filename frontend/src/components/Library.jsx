@@ -25,7 +25,9 @@ const Library = (props) => {
 
   return (
     <>
-    <h1 className="library-title">My Library</h1>
+      <div className="library-title-container">
+        <h1 className="library-title">My Library</h1>
+      </div>
       <div className="library-container">
         {library ? library.map(game => <h2 onClick={() => {
           setLibraryPopup(true)
