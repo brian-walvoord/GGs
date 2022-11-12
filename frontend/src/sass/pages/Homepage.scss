@@ -50,10 +50,7 @@
     transform: translateY(10px) translateX(10px);
   }
   &:hover {
-    background-color: v.$primary-color;
-    .welcome-btn-txt {
-      color: v.$neutral-color;
-    }
+    background-color: v.$accent-color;
   }
 }
 

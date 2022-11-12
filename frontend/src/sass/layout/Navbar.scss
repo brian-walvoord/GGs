@@ -17,4 +17,7 @@
   color: v.$white;
   font-size: xx-large;
   text-underline-position: under;
+  &:hover {
+    color: v.$accent-color;
+  }
 }
