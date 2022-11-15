@@ -33,7 +33,7 @@ const Library = (props) => {
           setLibraryPopup(true)
           setSelection(game)
           setGameDeleted(false)
-        }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : <h1>No Games</h1>}
+        }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : null}
         {libraryPopup === true && <LibraryPopup 
                                     setRatingChanged={setRatingChanged} 
                                     ratingChanged={ratingChanged} 
