@@ -1,12 +1,13 @@
 import '../sass/layout/App.scss';
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import UserSelect from "./UserSelect";
 import Games from "./Games";
 import Library from "./Library";
 import Navbar from "./Navbar";
 import Homepage from "./Homepage";
 import Header from "./Header";
+import Signup from "./Signup";
 
 function App() {
 
@@ -21,21 +22,16 @@ function App() {
 
   return (
     <div className="app-container">
-      <Router>
         <Header user={user} />
-        <Switch>
-          <Route exact path="/">
-            <UserSelect setSelectedUser={setSelectedUser}/>
-          </Route>
-          <Route path="/home">
-            <Navbar setUser={setUser}/>
+        <Routes>
+          <Route exact path="/" element={<UserSelect setSelectedUser={setSelectedUser}/>} />
+          <Route path="/home" element={<><Navbar setUser={setUser}/>
             <Homepage 
               user={user} 
               setUser={setUser} 
               selectedUser={selectedUser} 
-            />
-          </Route>
-          <Route path="/games">
+            /></>} />
+          <Route path="/games" element={<>
             <Navbar setUser={setUser} />
             <Games 
               games={games} 
@@ -46,8 +42,8 @@ function App() {
               setSelection={setSelection}
               user={user}
             />
-          </Route>
-          <Route path="/library">
+          </>} />
+          <Route path="/library" element={<>
             <Navbar setUser={setUser} />
             <Library 
               selection={selection}
@@ -58,9 +54,9 @@ function App() {
               library={library}
               setLibrary={setLibrary}
             />
-          </Route>
-        </Switch>
-      </Router>
+          </>} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
       <div className="background"></div>
     </div>
   );
