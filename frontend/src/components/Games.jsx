@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../sass/pages/Games.scss";
 import GamePopup from "./GamePopup.jsx";
 
@@ -16,6 +16,10 @@ const Games = (props) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [gameAlreadyAdded, setGameAlreadyAdded] = useState(null)
+
+  useEffect(() => {
+    setGames(null);
+  }, [])
 
   const fetchGames = () => {
     fetch(`/games/getGames/?search=${searchQuery}`)
