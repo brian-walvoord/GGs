@@ -23,6 +23,7 @@ const GameController = {
       res.status(500).send();
     }
   },
+
   checkIfAdded: async (req, res) => {
     try {
       let { selection, user } = req.headers;
@@ -39,6 +40,7 @@ const GameController = {
       res.status(500).send()
     }
   },
+
   getCover: async (req, res) => {
     try {
       let { id } = req.query;
@@ -57,6 +59,7 @@ const GameController = {
       res.status(500).send();
     }
   },
+
   addGame: async (req, res) => {
     try {
       let { user, selection } = await req.headers;
@@ -75,6 +78,7 @@ const GameController = {
       res.status(500).send();
     }
   },
+
   getLibrary: async (req, res) => {
     try {
       const { id } = req.query;
@@ -85,6 +89,7 @@ const GameController = {
       res.status(500).send();
     }
   },
+
   addRating: async (req, res) => {
     try {
       const { rating } = req.query;
@@ -96,6 +101,57 @@ const GameController = {
       res.status(500).send();
     }
   },
+
+  //####################################################
+  addGraphicsRating: async (req, res) => {
+    try {
+      const { rating } = req.query;
+      const { id } = req.headers;
+      await knex("user_games").update({"graphics": rating}).where({"id": id})
+      res.status(200).send();
+    } catch (err) {
+      console.log(err);
+      res.status(500).send();
+    }
+  },
+
+  addSoundRating: async (req, res) => {
+    try {
+      const { rating } = req.query;
+      const { id } = req.headers;
+      await knex("user_games").update({"sound_and_music": rating}).where({"id": id})
+      res.status(200).send();
+    } catch (err) {
+      console.log(err);
+      res.status(500).send();
+    }
+  },
+
+  addGameplayRating: async (req, res) => {
+    try {
+      const { rating } = req.query;
+      const { id } = req.headers;
+      await knex("user_games").update({"gameplay": rating}).where({"id": id})
+      res.status(200).send();
+    } catch (err) {
+      console.log(err);
+      res.status(500).send();
+    }
+  },
+
+  addReplayRating: async (req, res) => {
+    try {
+      const { rating } = req.query;
+      const { id } = req.headers;
+      await knex("user_games").update({"replayability": rating}).where({"id": id})
+      res.status(200).send();
+    } catch (err) {
+      console.log(err);
+      res.status(500).send();
+    }
+  },
+  //#####################################################
+
   getRating: async (req, res) => {
     try {
       const { id } = req.query;
@@ -106,6 +162,53 @@ const GameController = {
       res.status(500).send();
     }
   },
+
+  //##################################################
+  getGraphicsRating: async (req, res) => {
+    try {
+      const { id } = req.query;
+      const rating = await knex.select("graphics").from("user_games").where({"id": id})
+      res.status(200).json(rating)
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
+
+  getSoundRating: async (req, res) => {
+    try {
+      const { id } = req.query;
+      const rating = await knex.select("sound_and_music").from("user_games").where({"id": id})
+      res.status(200).json(rating)
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
+
+  getGameplayRating: async (req, res) => {
+    try {
+      const { id } = req.query;
+      const rating = await knex.select("gameplay").from("user_games").where({"id": id})
+      res.status(200).json(rating)
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
+
+  getReplayRating: async (req, res) => {
+    try {
+      const { id } = req.query;
+      const rating = await knex.select("replayability").from("user_games").where({"id": id})
+      res.status(200).json(rating)
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
+  //##################################################
+
   removeGame: async (req, res) => {
     try {
       const { id } = req.query;

@@ -15,6 +15,10 @@ const Library = (props) => {
 
   const [gameDeleted, setGameDeleted] = useState(false);
   const [ratingChanged, setRatingChanged] = useState(false);
+  const [graphicsRatingChanged, setGraphicsRatingChanged] = useState(false);
+  const [soundRatingChanged, setSoundRatingChanged] = useState(false);
+  const [gameplayRatingChanged, setGameplayRatingChanged] = useState(false);
+  const [replayRatingChanged, setReplayRatingChanged] = useState(false);
 
 
   useEffect(() => {
@@ -37,6 +41,14 @@ const Library = (props) => {
         {libraryPopup === true && <LibraryPopup 
                                     setRatingChanged={setRatingChanged} 
                                     ratingChanged={ratingChanged} 
+                                    graphicsRatingChanged={graphicsRatingChanged}
+                                    setGraphicsRatingChanged={setGraphicsRatingChanged}
+                                    soundRatingChanged={soundRatingChanged}
+                                    setSoundRatingChanged={setSoundRatingChanged}
+                                    gameplayRatingChanged={gameplayRatingChanged}
+                                    setGameplayRatingChanged={setGameplayRatingChanged}
+                                    replayRatingChanged={replayRatingChanged}
+                                    setReplayRatingChanged={setReplayRatingChanged}
                                     gameDeleted={gameDeleted} 
                                     setGameDeleted={setGameDeleted} 
                                     selection={selection} 
