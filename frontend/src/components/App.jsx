@@ -24,7 +24,7 @@ function App() {
     <div className="app-container">
         <Header user={user} />
         <Routes>
-          <Route exact path="/" element={<UserSelect setSelectedUser={setSelectedUser}/>} />
+          <Route path="/" element={<UserSelect setSelectedUser={setSelectedUser}/>} />
           <Route path="/home" element={<><Navbar setUser={setUser}/>
             <Homepage 
               user={user} 
