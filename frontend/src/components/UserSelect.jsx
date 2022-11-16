@@ -9,34 +9,28 @@ const UserSelect = (props) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [auth, setAuth] = useState(true);
 
   const handleLogin = () => {
     fetch(`/users/auth?username=${username}&password=${password}`)
-      .then(res => res.status === 404 ? console.log("Nope") : navigate("/home"))
-      // .then(res => setSelectedUser(res))
+      .then(res => res.json())
+      .then(res => (typeof res === "string") ? setAuth(false) : handleAuthSuccess(res))
+  }
+
+  const handleAuthSuccess = (res) => {
+    setSelectedUser(JSON.stringify(res[0].id));
+    navigate("/home")
   }
 
   return (
     <>
-      {/* <div className="user-select-container">
-        <div className="pill-container">
-          <h1 className="select-title">Please select a user:</h1>
-          <select name="users" className="user-select" onChange={e => setSelectedUser(e.target.value)}>
-            <option value="1">🪁 Franklin</option>
-            <option value="2">🎩 Abraham</option>
-            <option value="3">🕶 Barack</option>
-            <option value="4">🪓 George</option>
-            <option value="5">🖋 Thomas</option>
-          </select>
-          <Link className="btn-txt" to="/home"><button className="btn-user">Login</button></Link>
-        </div>
-      </div> */}
       <div className="user-select-container">
         <div className="pill-container">
           <h1 className="select-title">Please sign in:</h1>
           <input onChange={e => setUsername(e.target.value)} className="usernameLogin" placeholder="username"></input>
           <input onChange={e => setPassword(e.target.value)} type="password" className="passwordLogin" placeholder="password"></input>
           <button onClick={handleLogin} className="btn-user">Login</button>
+          {!auth && <h3 className="auth-fail">incorrect username or password</h3>}
           <p className="signup-txt">New to GGs? Click <Link to="/signup">sign up</Link> to make an account</p>
         </div>
       </div>

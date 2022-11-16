@@ -16,7 +16,7 @@ const UserController = {
     try {
       const { username, password } = req.query;
       const user = await knex.select().from("users").where({ "username": username, "password": password})
-      user.length ? res.status(200).json(user) : res.status(404).json("username not found");
+      user.length ? res.status(200).json(user) : res.status(404).json('user not found');
     } catch (err) {
       console.log(err)
     }

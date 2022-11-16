@@ -16,7 +16,7 @@ function App() {
   const [gamePopup, setGamePopup] = useState(false);
   const [libraryPopup, setLibraryPopup] = useState(false);
   const [selection, setSelection] = useState(null);
-  const [selectedUser, setSelectedUser] = useState("1");
+  const [selectedUser, setSelectedUser] = useState("1"); // <-- this is what is causing it to default to 1. Find way to store user (JWT?)
   const [user, setUser] = useState("");
   const [library, setLibrary] = useState(null);
 
