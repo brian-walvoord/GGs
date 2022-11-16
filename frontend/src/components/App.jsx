@@ -19,12 +19,13 @@ function App() {
   const [selectedUser, setSelectedUser] = useState("1"); // <-- this is what is causing it to default to 1. Find way to store user (JWT?)
   const [user, setUser] = useState("");
   const [library, setLibrary] = useState(null);
+  const [userCreated, setUserCreated] = useState(false);
 
   return (
     <div className="app-container">
         <Header user={user} />
         <Routes>
-          <Route path="/" element={<UserSelect setSelectedUser={setSelectedUser}/>} />
+          <Route path="/" element={<UserSelect setSelectedUser={setSelectedUser} userCreated={userCreated}/>} />
           <Route path="/home" element={<><Navbar setUser={setUser}/>
             <Homepage 
               user={user} 
@@ -55,7 +56,7 @@ function App() {
               setLibrary={setLibrary}
             />
           </>} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup setUserCreated={setUserCreated}/>} />
         </Routes>
       <div className="background"></div>
     </div>

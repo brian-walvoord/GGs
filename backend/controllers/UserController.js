@@ -20,6 +20,20 @@ const UserController = {
     } catch (err) {
       console.log(err)
     }
+  },
+  signup: async (req, res) => {
+    try {
+      const { first_name, last_name, username, password } = req.headers;
+      await knex('users').insert({ 
+        first_name: first_name,
+        last_name: last_name,
+        username: username,
+        password: password,
+      })
+      res.status(200).json("user successfully added");
+    } catch (err) {
+      console.log(err);
+    }
   }
 };
 

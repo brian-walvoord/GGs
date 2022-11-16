@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../sass/pages/UserSelect.scss";
 
 const UserSelect = (props) => {
-  const { setSelectedUser } = props
+  const { setSelectedUser, userCreated } = props
 
   const navigate = useNavigate();
 
@@ -31,6 +31,7 @@ const UserSelect = (props) => {
           <input onChange={e => setPassword(e.target.value)} type="password" className="passwordLogin" placeholder="password"></input>
           <button onClick={handleLogin} className="btn-user">Login</button>
           {!auth && <h3 className="auth-fail">incorrect username or password</h3>}
+          {userCreated && <h3 className="signup-success">User created! Please login</h3>}
           <p className="signup-txt">New to GGs? Click <Link to="/signup">sign up</Link> to make an account</p>
         </div>
       </div>
