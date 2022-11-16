@@ -30,7 +30,7 @@ const GamePopup = (props) => {
       .then(res => res.json())
       .then(res => {
         let coverArr = res[0].url.split("thumb");
-        coverArr.splice(1, 0, "cover_big_2x");
+        coverArr.splice(1, 0, "cover_big");
         return coverArr.join("");
       })
       .then(res => setCover(res))

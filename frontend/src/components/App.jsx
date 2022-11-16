@@ -21,6 +21,11 @@ function App() {
   const [library, setLibrary] = useState(null);
   const [userCreated, setUserCreated] = useState(false);
 
+  // testing with these states for lists
+  const [wishlist, setWishlist] = useState(null);
+  const [notYetPlayed, setNotYetPlayed] = useState(null);
+  const [played, setPlayed] = useState(null);
+
   return (
     <div className="app-container">
         <Header user={user} />

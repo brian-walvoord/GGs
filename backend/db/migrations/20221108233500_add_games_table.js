@@ -11,6 +11,12 @@ exports.up = function (knex) {
     table.text("description_of_game");
     table.string("cover_of_game");
     table.integer("user_rating");
+    table.text("user_comments");
+    table.text("list");
+    table.integer("graphics");
+    table.integer("sound_and_music");
+    table.integer("gameplay");
+    table.integer("replayability");
   });
 };
 
