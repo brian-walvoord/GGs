@@ -55,13 +55,13 @@
 }
 
 .auth-fail {
-  color: rgb(184, 0, 0);
+  color: v.$error-red;
   font-style: italic;
   margin-top: .5rem;
 }
 
 .signup-success {
-  color: rgb(0, 239, 0);
+  color: v.$success-green;
   font-style: italic;
   margin-top: .5rem;
 }
