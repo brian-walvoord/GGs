@@ -38,3 +38,22 @@
   width: 0;
   font-size: 130px;
 }
+
+.library-list-title {
+  color: v.$white;
+  font-weight: bold;
+  font-size: xx-large;
+  margin-right: 1rem;
+}
+
+.library-list-dropdown {
+  width: 20rem;
+  font-size: xx-large;
+}
+
+.list-select-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+}

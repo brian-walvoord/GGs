@@ -20,25 +20,56 @@ const Library = (props) => {
   const [gameplayRatingChanged, setGameplayRatingChanged] = useState(false);
   const [replayRatingChanged, setReplayRatingChanged] = useState(false);
   const [commentsChanged, setCommentsChanged] = useState(false);
+  const [listChanged, setListChanged] = useState(false);
+
+  const [currentList, setCurrentList] = useState(null)
 
 
   useEffect(() => {
     fetch(`/games/getLibrary?id=${user[0].id}`)
       .then(res => res.json())
-      .then(res => setLibrary(res))
-  }, [gameDeleted])
+      .then(res => setLibrary(res));
+  }, [gameDeleted, listChanged])
+
+  const handleListSelect = (selectedList) => {
+    if (selectedList === "all") {
+      setCurrentList(library);
+    } else {
+      setCurrentList(library.filter(game => {
+        if (game.list === selectedList) {
+          return game;
+        }
+      }))
+    }
+  };
+
+  const renderList = () => {
+    return currentList.map(game => <h2 onClick={() => {
+      setLibraryPopup(true)
+      setSelection(game)
+      setGameDeleted(false)
+      }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>)
+  }
 
   return (
     <>
       <div className="library-title-container">
         <h1 className="library-title">My Library</h1>
       </div>
-      <div className="library-container">
-        {library ? library.map(game => <h2 onClick={() => {
-          setLibraryPopup(true)
-          setSelection(game)
-          setGameDeleted(false)
-        }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>) : null}
+        <div className="list-select-container">
+          <label className="library-list-title">Select a list to view:</label>
+          <select onChange={e => handleListSelect(e.target.value)} className="library-list-dropdown">
+            <option value="null"></option>
+            <option value="all">all games</option>
+            <option value="unassigned">unassigned</option>
+            <option value="wishlist">wishlist</option>
+            <option value="haven't started">haven't started</option>
+            <option value="started">started</option>
+            <option value="finished">finished</option>
+          </select>
+        </div>
+        {currentList && renderList()}
+        <div className="footer">~End of List~</div>
         {libraryPopup === true && <LibraryPopup 
                                     setRatingChanged={setRatingChanged} 
                                     ratingChanged={ratingChanged} 
@@ -56,8 +87,9 @@ const Library = (props) => {
                                     setLibraryPopup={setLibraryPopup}
                                     commentsChanged={commentsChanged}
                                     setCommentsChanged={setCommentsChanged}
+                                    listChanged={listChanged}
+                                    setListChanged={setListChanged}
                                   />}
-      </div>
     </>
   )
 }

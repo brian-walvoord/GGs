@@ -71,6 +71,7 @@ const GameController = {
         name_of_game: selectionObj.name,
         description_of_game: selectionObj.summary,
         cover_of_game: selectionObj.cover,
+        list: "unassigned",
       })
       res.status(200).send("successfully added");
     } catch (err) {
@@ -161,6 +162,18 @@ const GameController = {
       res.status(500).send();
     }
   },
+
+  addList: async (req, res) => {
+    try {
+      const { id, list } = req.headers;
+      await knex("user_games").update({"list": list}).where({"id": id})
+      res.status(200).send();
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
+
   //#####################################################
 
   getRating: async (req, res) => {
@@ -224,6 +237,17 @@ const GameController = {
       const { id } = req.query;
       const comments = await knex.select("user_comments").from("user_games").where({"id": id})
       res.status(200).json(comments)
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
+
+  getList: async (req, res) => {
+    try {
+      const { id } = req.query;
+      const list = await knex.select("list").from("user_games").where({"id": id})
+      res.status(200).json(list);
     } catch (err) {
       console.log(err)
       res.status(500).send();

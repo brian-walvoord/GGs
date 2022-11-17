@@ -25,6 +25,8 @@ const LibraryPopup = (props) => {
     setReplayRatingChanged,
     commentsChanged,
     setCommentsChanged,
+    listChanged,
+    setListChanged
   } = props;
 
   const [cover, setCover] = useState(null);
@@ -37,6 +39,8 @@ const LibraryPopup = (props) => {
   const [databaseGameplayRating, setDatabaseGameplayRating] = useState(null);
   const [databaseReplayRating, setDatabaseReplayRating] = useState(null);
   const [databaseComments, setDatabaseComments] = useState(null);
+
+  const [databaseList, setDatabaseList] = useState(null);
   //##########################
 
   const [moreOptions, setMoreOptions] = useState(false);
@@ -125,6 +129,19 @@ const LibraryPopup = (props) => {
       setCommentsChanged(true);
     }
   }
+
+  const submitList = async (list) => {
+    let result = await fetch(`/games/addList`, {
+      method: "PUT",
+      headers: {
+        id: JSON.stringify(selection.id),
+        list: list
+      }
+    })
+    if (result.status === 200) {
+      setListChanged(true);
+    }
+  }
   //##########################################################
 
 
@@ -164,6 +181,12 @@ const LibraryPopup = (props) => {
       .then(res => res.json())
       .then(res => setDatabaseComments(res[0].user_comments))
   }, [commentsChanged])
+
+  useEffect(() => {
+    fetch(`/games/getList?id=${selection.id}`)
+      .then(res => res.json())
+      .then(res => setDatabaseList(res[0].list))
+  }, [listChanged])
   //#########################################################
 
   useEffect(() => {
@@ -225,6 +248,18 @@ const LibraryPopup = (props) => {
           <div className="title">
             <h1 className="name">{selection.name_of_game}</h1>
             <div className="rating-container">
+              {databaseList ? <h2>List: {databaseList}</h2> : <h2>List: none</h2>}
+              <label className="rating-title">Change List:</label>
+              <select onChange={e => {
+                submitList(e.target.value)
+                setListChanged(false)
+              }} className="list-dropdown">
+                <option value="null"></option>
+                <option value="wishlist">wishlist</option>
+                <option value="haven't started">haven't started</option>
+                <option value="started">started</option>
+                <option value="finished">finished</option>
+              </select>
               {databaseRating ? <h2>Your Rating: <span className="rating-score">{databaseRating}/10</span></h2> : <h2>Your Rating: <i>not yet rated</i></h2>}
               <label className="rating-title">Change Rating:</label>
               {makeTenRatings(e => {

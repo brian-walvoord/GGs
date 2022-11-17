@@ -13,14 +13,18 @@ router.get("/getSoundRating", user_ctrl.getSoundRating);
 router.get("/getGameplayRating", user_ctrl.getGameplayRating);
 router.get("/getReplayRating", user_ctrl.getReplayRating);
 router.get("/getComments", user_ctrl.getComments);
+router.get("/getList", user_ctrl.getList);
 
 router.post("/addGame", user_ctrl.addGame);
+
 router.put("/addRating", user_ctrl.addRating);
 router.put("/addGraphicsRating", user_ctrl.addGraphicsRating);
 router.put("/addSoundRating", user_ctrl.addSoundRating);
 router.put("/addGameplayRating", user_ctrl.addGameplayRating);
 router.put("/addReplayRating", user_ctrl.addReplayRating);
 router.put("/addComments", user_ctrl.addComments);
+router.put("/addList", user_ctrl.addList);
+
 router.delete("/removeGame", user_ctrl.removeGame);
 
 module.exports = router;
