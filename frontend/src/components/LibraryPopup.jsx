@@ -23,6 +23,8 @@ const LibraryPopup = (props) => {
     setGameplayRatingChanged,
     replayRatingChanged,
     setReplayRatingChanged,
+    commentsChanged,
+    setCommentsChanged,
   } = props;
 
   const [cover, setCover] = useState(null);
@@ -34,6 +36,7 @@ const LibraryPopup = (props) => {
   const [databaseSoundRating, setDatabaseSoundRating] = useState(null);
   const [databaseGameplayRating, setDatabaseGameplayRating] = useState(null);
   const [databaseReplayRating, setDatabaseReplayRating] = useState(null);
+  const [databaseComments, setDatabaseComments] = useState(null);
   //##########################
 
   const [moreOptions, setMoreOptions] = useState(false);
@@ -108,6 +111,20 @@ const LibraryPopup = (props) => {
       setReplayRatingChanged(true);
     }
   }
+
+  // comments submit
+  const submitComments = async (comments) => {
+    let result = await fetch(`/games/addComments`, {
+      method: "PUT",
+      headers: {
+        id: JSON.stringify(selection.id),
+        comments: comments,
+      }
+    })
+    if (result.status === 200) {
+      setCommentsChanged(true);
+    }
+  }
   //##########################################################
 
 
@@ -141,6 +158,12 @@ const LibraryPopup = (props) => {
       .then(res => res.json())
       .then(res => setDatabaseReplayRating(res[0].replayability))
   }, [replayRatingChanged])
+
+  useEffect(() => {
+    fetch(`/games/getComments?id=${selection.id}`)
+      .then(res => res.json())
+      .then(res => setDatabaseComments(res[0].user_comments))
+  }, [commentsChanged])
   //#########################################################
 
   useEffect(() => {
@@ -235,6 +258,13 @@ const LibraryPopup = (props) => {
                     submitReplayRating(e.target.value)
                     setReplayRatingChanged(false)
                   })}
+                  <div className="user-comments-container">
+                    <label className="rating-title">Comments:</label>
+                    <textarea onChange={e => {
+                      submitComments(e.target.value)
+                      setCommentsChanged(false);
+                    }} className="user-comments" placeholder="add comments here">{databaseComments}</textarea>
+                  </div>
                 </div>
               }
             </div>

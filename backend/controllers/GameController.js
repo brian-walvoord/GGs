@@ -150,6 +150,17 @@ const GameController = {
       res.status(500).send();
     }
   },
+
+  addComments: async (req, res) => {
+    try {
+      const { id, comments } = req.headers;
+      await knex("user_games").update({"user_comments": comments}).where({"id": id})
+      res.status(200).send();
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
   //#####################################################
 
   getRating: async (req, res) => {
@@ -202,6 +213,17 @@ const GameController = {
       const { id } = req.query;
       const rating = await knex.select("replayability").from("user_games").where({"id": id})
       res.status(200).json(rating)
+    } catch (err) {
+      console.log(err)
+      res.status(500).send();
+    }
+  },
+
+  getComments: async (req, res) => {
+    try {
+      const { id } = req.query;
+      const comments = await knex.select("user_comments").from("user_games").where({"id": id})
+      res.status(200).json(comments)
     } catch (err) {
       console.log(err)
       res.status(500).send();
