@@ -47,18 +47,22 @@ const Games = (props) => {
         ></input>
         <button className="game-btn" onClick={fetchGames}>Search</button>
       </div>
-      {games ? games.map(game => <h2 onClick={async () => {
-          setSelection(game);
-          await fetch(`/games/checkIfAdded`, {
-            method: "GET",
-            headers: {
-              selection: JSON.stringify(game.id),
-              user: JSON.stringify(user)
-            }
-          }).then(res => res.json())
-            .then(res => setGameAlreadyAdded(res))
-          setGamePopup(true);
-        }} className="game-container" key={game.id}>{JSON.stringify(game.name)}</h2>) : null}
+      {games ? games.map(game => {
+        return (
+          <div key={game.id} className="game-container" onClick={async () => {
+            setSelection(game);
+            await fetch(`/games/checkIfAdded`, {
+              method: "GET",
+              headers: {
+                selection: JSON.stringify(game.id),
+                user: JSON.stringify(user)
+              }
+            }).then(res => res.json())
+              .then(res => setGameAlreadyAdded(res))
+              setGamePopup(true);
+            }}>
+            <img className="thumbnail" src={game.cover.url} />
+            <h2 className="game-title">{JSON.stringify(game.name)}</h2></div>)}) : null}
       {gamePopup === true && <GamePopup 
                                 gameAlreadyAdded={gameAlreadyAdded} 
                                 setGameAlreadyAdded={setGameAlreadyAdded} 

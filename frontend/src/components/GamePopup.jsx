@@ -15,7 +15,6 @@ const GamePopup = (props) => {
     setGameAlreadyAdded 
   } = props;
 
-  const [cover, setCover] = useState(null)
   const [loaded, setLoaded] = useState(false);
   const [gameAdded, setGameAdded] = useState(false);
 
@@ -25,16 +24,11 @@ const GamePopup = (props) => {
     setGameAlreadyAdded(null);
   }
 
-  useEffect(() => {
-    fetch(`/games/getCover/?id=${selection.cover}`)
-      .then(res => res.json())
-      .then(res => {
-        let coverArr = res[0].url.split("thumb");
-        coverArr.splice(1, 0, "cover_big");
-        return coverArr.join("");
-      })
-      .then(res => setCover(res))
-  }, [])
+  const getLargePicture = () => {
+    let coverArr = selection.cover.url.split("thumb");
+    coverArr.splice(1, 0, "cover_big_2x");
+    return coverArr.join("");
+  }
 
   const addToLibrary = async () => {
     let selectionStr = JSON.stringify(selection);
@@ -65,7 +59,7 @@ const GamePopup = (props) => {
             <Card.Img
               className="game-cover"
               style={loaded ? {} : { display: 'none' }}
-              src={cover}
+              src={getLargePicture()}
               onLoad={() => setLoaded(true)}
             ></Card.Img>
         </div>

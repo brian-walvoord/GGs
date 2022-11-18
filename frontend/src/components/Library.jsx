@@ -44,11 +44,19 @@ const Library = (props) => {
   };
 
   const renderList = () => {
-    return currentList.map(game => <h2 onClick={() => {
-      setLibraryPopup(true)
-      setSelection(game)
-      setGameDeleted(false)
-      }} className="game-container" key={game.id}>{JSON.stringify(game.name_of_game)}</h2>)
+    return currentList.map(game => {
+      console.log(game)
+      return (
+        <div key={game.id} className="game-container" onClick={() => {
+          setLibraryPopup(true)
+          setSelection(game)
+          setGameDeleted(false)
+        }}>
+          <img className="thumbnail" src={game.cover_url} />
+          <h2 className="game-title">{JSON.stringify(game.name_of_game)}</h2>
+        </div>
+      )
+    })
   }
 
   return (

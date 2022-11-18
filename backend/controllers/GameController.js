@@ -14,7 +14,7 @@ const GameController = {
           "Client-ID": process.env.API_CLIENT_ID,
           "Authorization": process.env.API_AUTH,
         },
-        body: `fields name, cover, summary;search "${search}";where cover != null;limit 50;`
+        body: `fields name, cover.url, summary;search "${search}";where cover != null;limit 50;`
       })
         .then((data) => data.json())
         .then((data) => res.status(200).json(data));
@@ -41,25 +41,6 @@ const GameController = {
     }
   },
 
-  getCover: async (req, res) => {
-    try {
-      let { id } = req.query;
-      fetch("https://api.igdb.com/v4/covers", {
-        method: "POST",
-        headers: {
-          "Client-ID": process.env.API_CLIENT_ID,
-          "Authorization": process.env.API_AUTH,
-        },
-        body: `fields url;where id = ${id};`
-      })
-        .then(data => data.json())
-        .then(data => res.status(200).json(data))
-    } catch (err) {
-      console.log(err)
-      res.status(500).send();
-    }
-  },
-
   addGame: async (req, res) => {
     try {
       let { user, selection } = await req.headers;
@@ -72,6 +53,7 @@ const GameController = {
         description_of_game: selectionObj.summary,
         cover_of_game: selectionObj.cover,
         list: "unassigned",
+        cover_url: selectionObj.cover.url
       })
       res.status(200).send("successfully added");
     } catch (err) {

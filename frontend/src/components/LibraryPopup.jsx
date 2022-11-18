@@ -29,7 +29,6 @@ const LibraryPopup = (props) => {
     setListChanged
   } = props;
 
-  const [cover, setCover] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [databaseRating, setDatabaseRating] = useState(null);
 
@@ -189,17 +188,6 @@ const LibraryPopup = (props) => {
   }, [listChanged])
   //#########################################################
 
-  useEffect(() => {
-    fetch(`/games/getCover/?id=${selection.cover_of_game}`)
-      .then(res => res.json())
-      .then(res => {
-        let coverArr = res[0].url.split("thumb");
-        coverArr.splice(1, 0, "cover_big");
-        return coverArr.join("");
-      })
-      .then(res => setCover(res))
-  }, [])
-
   const removeGame = async () => {
     let result = await fetch(`/games/removeGame/?id=${selection.id}`, {
       method: "DELETE"
@@ -208,6 +196,12 @@ const LibraryPopup = (props) => {
       setGameDeleted(true);
     }
   };
+
+  const getLargePicture = () => {
+    let coverArr = selection.cover_url.split("thumb");
+    coverArr.splice(1, 0, "cover_big_2x");
+    return coverArr.join("");
+  }
 
   const makeTenRatings = (onChangeFunc) => {
     return (
@@ -240,7 +234,7 @@ const LibraryPopup = (props) => {
             <Card.Img
               className="game-cover"
               style={loaded ? {} : { display: 'none' }}
-              src={cover}
+              src={getLargePicture()}
               onLoad={() => setLoaded(true)}
             ></Card.Img>
         </div>
