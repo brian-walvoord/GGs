@@ -199,7 +199,7 @@ const LibraryPopup = (props) => {
 
   const getLargePicture = () => {
     let coverArr = selection.cover_url.split("thumb");
-    coverArr.splice(1, 0, "cover_big_2x");
+    coverArr.splice(1, 0, "cover_big");
     return coverArr.join("");
   }
 

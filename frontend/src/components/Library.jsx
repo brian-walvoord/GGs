@@ -10,7 +10,7 @@ const Library = (props) => {
     selection, 
     setLibraryPopup, 
     libraryPopup, 
-    setSelection 
+    setSelection,
   } = props;
 
   const [gameDeleted, setGameDeleted] = useState(false);
@@ -45,7 +45,6 @@ const Library = (props) => {
 
   const renderList = () => {
     return currentList.map(game => {
-      console.log(game)
       return (
         <div key={game.id} className="game-container" onClick={() => {
           setLibraryPopup(true)
