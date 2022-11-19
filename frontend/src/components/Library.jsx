@@ -20,42 +20,45 @@ const Library = (props) => {
   const [gameplayRatingChanged, setGameplayRatingChanged] = useState(false);
   const [replayRatingChanged, setReplayRatingChanged] = useState(false);
   const [commentsChanged, setCommentsChanged] = useState(false);
-  const [listChanged, setListChanged] = useState(false);
-
-  const [currentList, setCurrentList] = useState(null)
-
+  const [listChanged, setListChanged] = useState(false); // trigger, has individual game list been changed
+  const [listSelect, setListSelect] = useState(null) // user selected list to view
+  const [currentList, setCurrentList] = useState(null) // list of data
 
   useEffect(() => {
     fetch(`/games/getLibrary?id=${user[0].id}`)
       .then(res => res.json())
-      .then(res => setLibrary(res));
-  }, [gameDeleted, listChanged])
+      .then(res => {
+        setLibrary(res)
+      })
+  }, [gameDeleted, listChanged, listSelect])
 
-  const handleListSelect = (selectedList) => {
-    if (selectedList === "all") {
+  useEffect(() => {
+    if (listSelect === "all") {
       setCurrentList(library);
-    } else {
+    } else if (listSelect) {
       setCurrentList(library.filter(game => {
-        if (game.list === selectedList) {
+        if (game.list === listSelect) {
           return game;
         }
       }))
     }
-  };
+  }, [listSelect])
 
   const renderList = () => {
-    return currentList.map(game => {
-      return (
-        <div key={game.id} className="game-container" onClick={() => {
-          setLibraryPopup(true)
-          setSelection(game)
-          setGameDeleted(false)
-        }}>
-          <img className="thumbnail" src={game.cover_url} />
-          <h2 className="game-title">{JSON.stringify(game.name_of_game)}</h2>
-        </div>
-      )
-    })
+    if (currentList) {
+      return currentList.map(game => {
+        return (
+          <div key={game.id} className="game-container" onClick={() => {
+            setLibraryPopup(true)
+            setSelection(game)
+            setGameDeleted(false)
+          }}>
+            <img className="thumbnail" src={game.cover_url} />
+            <h2 className="game-title">{JSON.stringify(game.name_of_game)}</h2>
+          </div>
+        )
+      })
+    }
   }
 
   return (
@@ -65,7 +68,7 @@ const Library = (props) => {
       </div>
         <div className="list-select-container">
           <label className="library-list-title">Select a list to view:</label>
-          <select onChange={e => handleListSelect(e.target.value)} className="library-list-dropdown">
+          <select onChange={e => setListSelect(e.target.value)} className="library-list-dropdown">
             <option value="null"></option>
             <option value="all">all games</option>
             <option value="unassigned">unassigned</option>
@@ -75,7 +78,7 @@ const Library = (props) => {
             <option value="finished">finished</option>
           </select>
         </div>
-        {currentList && renderList()}
+        {library && renderList()}
         <div className="footer">~End of List~</div>
         {libraryPopup === true && <LibraryPopup 
                                     setRatingChanged={setRatingChanged} 

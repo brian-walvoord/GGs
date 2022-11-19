@@ -6,7 +6,7 @@ const Homepage = (props) => {
   const { 
     selectedUser,
     setUser,
-    user
+    user,
   } = props;
 
   // use this to fetch full name from database with the selectedUser number === id

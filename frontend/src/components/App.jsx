@@ -1,5 +1,5 @@
 import '../sass/layout/App.scss';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import UserSelect from "./UserSelect";
 import Games from "./Games";
@@ -35,7 +35,7 @@ function App() {
             <Homepage 
               user={user} 
               setUser={setUser} 
-              selectedUser={selectedUser} 
+              selectedUser={selectedUser}
             /></>} />
           <Route path="/games" element={<>
             <Navbar setUser={setUser} />

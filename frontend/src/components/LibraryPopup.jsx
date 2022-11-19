@@ -26,7 +26,7 @@ const LibraryPopup = (props) => {
     commentsChanged,
     setCommentsChanged,
     listChanged,
-    setListChanged
+    setListChanged,
   } = props;
 
   const [loaded, setLoaded] = useState(false);
