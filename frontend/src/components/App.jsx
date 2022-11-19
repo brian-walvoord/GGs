@@ -1,5 +1,5 @@
 import '../sass/layout/App.scss';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import UserSelect from "./UserSelect";
 import Games from "./Games";
@@ -16,19 +16,14 @@ function App() {
   const [gamePopup, setGamePopup] = useState(false);
   const [libraryPopup, setLibraryPopup] = useState(false);
   const [selection, setSelection] = useState(null);
-  const [selectedUser, setSelectedUser] = useState("1"); // <-- this is what is causing it to default to 1. Find way to store user (JWT?)
+  const [selectedUser, setSelectedUser] = useState(localStorage.getItem("id"))
   const [user, setUser] = useState("");
   const [library, setLibrary] = useState(null);
   const [userCreated, setUserCreated] = useState(false);
 
-  // testing with these states for lists
-  const [wishlist, setWishlist] = useState(null);
-  const [notYetPlayed, setNotYetPlayed] = useState(null);
-  const [played, setPlayed] = useState(null);
-
   return (
     <div className="app-container">
-        <Header user={user} />
+        <Header user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<UserSelect setSelectedUser={setSelectedUser} userCreated={userCreated}/>} />
           <Route path="/home" element={<><Navbar setUser={setUser}/>
@@ -56,7 +51,6 @@ function App() {
               setSelection={setSelection}
               setLibraryPopup={setLibraryPopup}
               libraryPopup = {libraryPopup}
-              user={user}
               library={library}
               setLibrary={setLibrary}
             />

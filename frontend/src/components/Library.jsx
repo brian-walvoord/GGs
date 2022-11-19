@@ -6,7 +6,6 @@ const Library = (props) => {
   const { 
     library, 
     setLibrary, 
-    user, 
     selection, 
     setLibraryPopup, 
     libraryPopup, 
@@ -25,7 +24,7 @@ const Library = (props) => {
   const [currentList, setCurrentList] = useState(null) // list of data
 
   useEffect(() => {
-    fetch(`/games/getLibrary?id=${user[0].id}`)
+    fetch(`/games/getLibrary?id=${localStorage.getItem("id")}`)
       .then(res => res.json())
       .then(res => {
         setLibrary(res)

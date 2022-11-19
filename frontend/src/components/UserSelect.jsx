@@ -19,6 +19,7 @@ const UserSelect = (props) => {
 
   const handleAuthSuccess = (res) => {
     setSelectedUser(JSON.stringify(res[0].id));
+    localStorage.setItem("id", JSON.stringify(res[0].id));
     navigate("/home")
   }
 

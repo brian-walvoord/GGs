@@ -1,7 +1,16 @@
 import "../sass/layout/Header.scss";
+import { useEffect } from "react";
 
 const Header = (props) => {
-  const { user } = props
+  const { setUser, user } = props
+
+  useEffect(() => {
+    if (localStorage.getItem("id")) {
+      fetch(`/users/getFullName?id=${localStorage.getItem("id")}`)
+        .then(res => res.json())
+        .then(res => setUser(res))
+    }
+  }, [])
 
   return (
     <div className="header-container">
