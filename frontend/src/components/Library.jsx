@@ -54,6 +54,7 @@ const Library = (props) => {
           }}>
             <img className="thumbnail" src={game.cover_url} />
             <h2 className="game-title">{JSON.stringify(game.name_of_game)}</h2>
+            <h3 className="list-preview">{game.list}</h3>
           </div>
         )
       })
