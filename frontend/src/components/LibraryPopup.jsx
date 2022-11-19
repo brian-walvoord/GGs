@@ -31,17 +31,12 @@ const LibraryPopup = (props) => {
 
   const [loaded, setLoaded] = useState(false);
   const [databaseRating, setDatabaseRating] = useState(null);
-
-  //##########################
   const [databaseGraphicsRating, setDatabaseGraphicsRating] = useState(null);
   const [databaseSoundRating, setDatabaseSoundRating] = useState(null);
   const [databaseGameplayRating, setDatabaseGameplayRating] = useState(null);
   const [databaseReplayRating, setDatabaseReplayRating] = useState(null);
   const [databaseComments, setDatabaseComments] = useState(null);
-
   const [databaseList, setDatabaseList] = useState(null);
-  //##########################
-
   const [moreOptions, setMoreOptions] = useState(false);
 
 
@@ -49,7 +44,6 @@ const LibraryPopup = (props) => {
     setLibraryPopup(false)
   }
 
-  // rating submits
   const submitRating = async (userRating) => {
     let result = await fetch(`/games/addRating?rating=${userRating}`, {
       method: "PUT",
@@ -62,8 +56,6 @@ const LibraryPopup = (props) => {
     }
   }
 
-  //#################################################################
-  // graphics rating submit
   const submitGraphicsRating = async (userRating) => {
     let result = await fetch(`/games/addGraphicsRating?rating=${userRating}`, {
       method: "PUT",
@@ -76,7 +68,6 @@ const LibraryPopup = (props) => {
     }
   }
 
-  // sound_and_music rating submit
   const submitSoundRating = async (userRating) => {
     let result = await fetch(`/games/addSoundRating?rating=${userRating}`, {
       method: "PUT",
@@ -89,7 +80,6 @@ const LibraryPopup = (props) => {
     }
   }
 
-  // gameplay rating submit
   const submitGameplayRating = async (userRating) => {
     let result = await fetch(`/games/addGameplayRating?rating=${userRating}`, {
       method: "PUT",
@@ -102,7 +92,6 @@ const LibraryPopup = (props) => {
     }
   }
 
-  // replayability rating submit
   const submitReplayRating = async (userRating) => {
     let result = await fetch(`/games/addReplayRating?rating=${userRating}`, {
       method: "PUT",
@@ -115,7 +104,6 @@ const LibraryPopup = (props) => {
     }
   }
 
-  // comments submit
   const submitComments = async (comments) => {
     let result = await fetch(`/games/addComments`, {
       method: "PUT",
@@ -141,7 +129,8 @@ const LibraryPopup = (props) => {
       setListChanged(true);
     }
   }
-  //##########################################################
+
+
 
 
   useEffect(() => {
@@ -150,7 +139,6 @@ const LibraryPopup = (props) => {
       .then(res => setDatabaseRating(res[0].user_rating))
   }, [ratingChanged])
 
-  //#########################################################
   useEffect(() => {
     fetch(`/games/getGraphicsRating/?id=${selection.id}`)
       .then(res => res.json())
@@ -186,7 +174,8 @@ const LibraryPopup = (props) => {
       .then(res => res.json())
       .then(res => setDatabaseList(res[0].list))
   }, [listChanged])
-  //#########################################################
+
+
 
   const removeGame = async () => {
     let result = await fetch(`/games/removeGame/?id=${selection.id}`, {
@@ -294,6 +283,7 @@ const LibraryPopup = (props) => {
                       setCommentsChanged(false);
                     }} className="user-comments" placeholder="add comments here">{databaseComments}</textarea>
                   </div>
+                  <button onClick={() => setMoreOptions(false)}>less options</button>
                 </div>
               }
             </div>
