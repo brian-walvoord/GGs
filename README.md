@@ -22,7 +22,7 @@
 * Get api key from [IGDB](https://www.igdb.com/api)
 
 # Setup
-Begin by running the following command in the root folder to install depencies  
+Begin by running the following command in the root folder to install dependencies  
 ```
 npm install
 ```  
