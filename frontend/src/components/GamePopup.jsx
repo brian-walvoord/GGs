@@ -2,17 +2,17 @@ import Modal from "react-bootstrap/Modal";
 import Card from 'react-bootstrap/Card';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Spinner from 'react-bootstrap/Spinner';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../sass/layout/Popup.scss";
 
 const GamePopup = (props) => {
-  const { 
-    setGamePopup, 
-    selection, 
-    user, 
-    gameAlreadyAdded, 
-    setGameAlreadyAdded 
+  const {
+    setGamePopup,
+    selection,
+    user,
+    gameAlreadyAdded,
+    setGameAlreadyAdded
   } = props;
 
   const [loaded, setLoaded] = useState(false);
@@ -49,19 +49,19 @@ const GamePopup = (props) => {
   return (
     <Modal size="lg" show={true} onHide={closePopup}>
       <Card className="popup-container">
-        <CloseButton className="closeBtn" onClick={closePopup}/>
+        <CloseButton className="closeBtn" onClick={closePopup} />
         <div className="image-container">
           {loaded ? null : (
             <div className="load-container">
               <Spinner animation="border" role="status"></Spinner>
             </div>
           )}
-            <Card.Img
-              className="game-cover"
-              style={loaded ? {} : { display: 'none' }}
-              src={getLargePicture()}
-              onLoad={() => setLoaded(true)}
-            ></Card.Img>
+          <Card.Img
+            className="game-cover"
+            style={loaded ? {} : { display: 'none' }}
+            src={getLargePicture()}
+            onLoad={() => setLoaded(true)}
+          ></Card.Img>
         </div>
         <Card.Body>
           <div className="title">
